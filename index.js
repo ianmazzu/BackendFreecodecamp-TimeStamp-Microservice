@@ -38,8 +38,8 @@ app.get("/api/:date_string?", function (req, res) {
   }
 
   if (isNaN(date.getTime())) {
-    //return res.json({ error: "Invalid Date" }); codigo necesario para el ejercicio de freeCodeCamp, agrego el mio personalizado.
-    return res.json({ unix: null, utc:"Invalid Date,", error:"Please provide a valid date string that can be parsed with the Force." });
+    return res.json({ error: "Invalid Date" }); //codigo necesario para el ejercicio de freeCodeCamp, agrego el mio personalizado.
+    //return res.json({ unix: null, utc:"Invalid Date,", error:"Please provide a valid date string that can be parsed with the Force." });
   };
 
   res.json({
@@ -51,5 +51,5 @@ app.get("/api/:date_string?", function (req, res) {
 
 // Listen on port set in environment variable or default to 3000
 var listener = app.listen(process.env.PORT || 3000, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+  console.log('Your app is alive in the Force' + listener.address().port);
 });
