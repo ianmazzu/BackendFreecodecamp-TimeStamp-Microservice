@@ -20,10 +20,33 @@ app.get("/", function (req, res) {
 
 
 // your first API endpoint... 
-app.get("/api/hello", function (req, res) {
+/*app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
+*/
+//Logica de la API
+app.get("/api/:date_string?", function (req, res) {
+  let dateString = req.params.date_string;
+  let date;
 
+  if (!dateString) {
+    date = new Date();
+  } else if (/^\d+$/.test(dateString)) {
+    date = new Date(parseInt(dateString));
+  } else {
+    date = new Date(dateString);
+  }
+
+  if (isNaN(date.getTime())) {
+    //return res.json({ error: "Invalid Date" }); codigo necesario para el ejercicio de freeCodeCamp, agrego el mio personalizado.
+    return res.json({ unix: null, utc:"Invalid Date,", error:"Please provide a valid date string that can be parsed with the Force." });
+  };
+
+  res.json({
+    unix: date.getTime(),
+    utc: date.toUTCString()
+  });
+});
 
 
 // Listen on port set in environment variable or default to 3000
